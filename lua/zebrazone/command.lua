@@ -1,4 +1,4 @@
-local Highlighter = require("zebrazone.highligher").Highlighter
+local Highlighter = require("zebrazone.highlighter").Highlighter
 local messagelib = require("zebrazone.lib.message")
 local highlightlib = require("zebrazone.lib.highlight")
 

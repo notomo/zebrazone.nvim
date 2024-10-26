@@ -1,21 +1,23 @@
 local vim = vim
 
-local M = {}
-
 local Highlighter = {}
 Highlighter.__index = Highlighter
-M.Highlighter = Highlighter
 
 --- @param bufnr integer
---- @param ns integer
 --- @param hl_groups string[]
-function Highlighter.new(bufnr, ns, hl_groups)
-  local tbl = { _bufnr = bufnr, _ns = ns, _hl_groups = hl_groups, _hl_count = #hl_groups }
+function Highlighter.new(bufnr, hl_groups)
+  local tbl = {
+    _bufnr = bufnr,
+    _hl_groups = hl_groups,
+    _hl_count = #hl_groups,
+  }
   return setmetatable(tbl, Highlighter)
 end
 
+local ns = vim.api.nvim_create_namespace("zebrazone")
+
 function Highlighter.highlight(self, row)
-  vim.api.nvim_buf_set_extmark(self._bufnr, self._ns, row, 0, {
+  vim.api.nvim_buf_set_extmark(self._bufnr, ns, row, 0, {
     end_line = row + 1,
     hl_group = self._hl_groups[(row % self._hl_count) + 1],
     virt_text_pos = "overlay",
@@ -26,7 +28,6 @@ function Highlighter.highlight(self, row)
 end
 
 local highlighters = {}
-local ns = vim.api.nvim_create_namespace("zebrazone")
 vim.api.nvim_set_decoration_provider(ns, {})
 vim.api.nvim_set_decoration_provider(ns, {
   on_win = function(_, _, bufnr)
@@ -38,12 +39,14 @@ vim.api.nvim_set_decoration_provider(ns, {
   end,
 })
 
-function Highlighter.start(bufnr, hl_groups)
-  highlighters[bufnr] = Highlighter.new(bufnr, ns, hl_groups)
+local M = {}
+
+function M.start(bufnr, hl_groups)
+  highlighters[bufnr] = Highlighter.new(bufnr, hl_groups)
   vim.cmd("redraw!")
 end
 
-function Highlighter.stop(bufnr)
+function M.stop(bufnr)
   highlighters[bufnr] = nil
 end
 

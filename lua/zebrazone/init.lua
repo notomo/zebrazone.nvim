@@ -1,17 +1,15 @@
-local Command = require("zebrazone.command").Command
-
 local M = {}
 
 --- Start highlighting.
---- @param opts table: default = {bufnr = 0, hl_groups = {"ZebrazoneDefault", "NONE"}}
+--- @param opts {bufnr:integer?,hl_groups:string[]?}? default = {bufnr = 0, hl_groups = {"ZebrazoneDefault", "NONE"}}
 function M.start(opts)
-  return Command.new("start", opts)
+  require("zebrazone.command").start(opts)
 end
 
 --- Stop highlighting.
---- @param opts table: default = {bufnr = 0}
+--- @param opts {bufnr:integer?}? default = {bufnr = 0}
 function M.stop(opts)
-  return Command.new("stop", opts)
+  require("zebrazone.command").stop(opts)
 end
 
 return M

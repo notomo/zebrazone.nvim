@@ -46,7 +46,7 @@ local M = {}
 
 function M.start(bufnr, hl_groups)
   highlighters[bufnr] = Highlighter.new(bufnr, hl_groups)
-  vim.cmd("redraw!")
+  vim.api.nvim__redraw({ buf = bufnr, valid = true })
 end
 
 function M.stop(bufnr)

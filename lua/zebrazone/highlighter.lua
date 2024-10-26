@@ -6,8 +6,10 @@ local Highlighter = {}
 Highlighter.__index = Highlighter
 M.Highlighter = Highlighter
 
+--- @param bufnr integer
+--- @param ns integer
+--- @param hl_groups string[]
 function Highlighter.new(bufnr, ns, hl_groups)
-  vim.validate({ bufnr = { bufnr, "number" }, ns = { ns, "number" }, hl_groups = { hl_groups, "table" } })
   local tbl = { _bufnr = bufnr, _ns = ns, _hl_groups = hl_groups, _hl_count = #hl_groups }
   return setmetatable(tbl, Highlighter)
 end

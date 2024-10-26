@@ -28,24 +28,20 @@ highlightlib.default("ZebrazoneDefault", {
   guibg = { "StatusLineNC", "#3a4b5c" },
 })
 
+--- @param opts {bufnr:integer?,hl_groups:string[]?}?
 function Command.start(opts)
-  vim.validate({ opts = { opts, "table", true } })
   opts = opts or {}
 
-  vim.validate({ ["opts.bufnr"] = { opts.bufnr, "number", true } })
   local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
-
-  vim.validate({ ["opts.hl_groups"] = { opts.hl_groups, "table", true } })
   local hl_groups = opts.hl_groups or { "ZebrazoneDefault", "NONE" }
 
   return Highlighter.start(bufnr, hl_groups)
 end
 
+--- @param opts {bufnr:integer?}?
 function Command.stop(opts)
-  vim.validate({ opts = { opts, "table", true } })
   opts = opts or {}
 
-  vim.validate({ ["opts.bufnr"] = { opts.bufnr, "number", true } })
   local bufnr = opts.bufnr or vim.api.nvim_get_current_buf()
 
   return Highlighter.stop(bufnr)

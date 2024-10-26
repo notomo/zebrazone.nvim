@@ -19,10 +19,10 @@ function M.default(name, attributes)
 end
 
 local ATTRIBUTES = {
-  ctermfg = {"fg", "cterm"},
-  guifg = {"fg", "gui"},
-  ctermbg = {"bg", "cterm"},
-  guibg = {"bg", "gui"},
+  ctermfg = { "fg", "cterm" },
+  guifg = { "fg", "gui" },
+  ctermbg = { "bg", "cterm" },
+  guibg = { "bg", "gui" },
 }
 function M.get_attribute(hl_group, name)
   local hl_id = vim.api.nvim_get_hl_id_by_name(hl_group)

@@ -8,7 +8,7 @@ function M.error(err)
 end
 
 function M.warn(msg)
-  vim.api.nvim_echo({{prefix .. msg, "WarningMsg"}}, true, {})
+  vim.api.nvim_echo({ { prefix .. msg, "WarningMsg" } }, true, {})
 end
 
 return M

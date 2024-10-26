@@ -16,6 +16,8 @@ end
 
 local ns = vim.api.nvim_create_namespace("zebrazone")
 
+local hl = vim.hl or vim.highlight
+local priority = hl.priorities.user - 1
 function Highlighter.highlight(self, row)
   vim.api.nvim_buf_set_extmark(self._bufnr, ns, row, 0, {
     end_line = row + 1,
@@ -24,6 +26,7 @@ function Highlighter.highlight(self, row)
     hl_eol = true,
     ephemeral = true,
     hl_mode = "blend",
+    priority = priority,
   })
 end
 
